@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var url = "https://faishalp13.000webhostapp.com/cordova/www/json.php";
+        $.getJSON(url, function(result) {
+            console.log(result);
+            $.each(result, function(i, field) {
+                var id = field.id;
+                var nama=field.nama;
+                var nohp=field.nohp;
+                var jenis=field.jenis;
+                var warna=field.warna;
+                var jumlah=field.jumlah;
+                
+                $("#listview").append("<a class='item' href='form.html?id=" + id + "&nama=" + nama + "&nohp=" + nohp + "&jenis=" + jenis + "&warna=" + warna + "&jumlah" + jumlah + "'><h2>" + nama + " </h2><h2>" + nohp + " </h2><h2>" + jenis + " </h2><h2>" + warna + " </h2><p>" + jumlah + "</p></a>");
+            });
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+        <a href="index.html" class="button button-clear">Home</a>
+        <h1 class="title">Read Database (JSON)</h1>
+    </div>
+    <br/>
+    <br/>
+    <ul class="list" id="listview">
+    </ul>
+</body>
+
+</html>

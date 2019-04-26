@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {      
+        $("#insert").click(function() {
+            var nama = $("#nama").val();
+            var nohp = $("#nohp").val();
+            var jenis = $("#jenis").val();
+            var warna = $("#warna").val();
+            var jumlah = $("#jumlah").val();
+            var dataString = "nama=" + nama + "&nohp=" + nohp + "&jenis=" + jenis +  "&warna=" + warna + "&jumlah=" + jumlah +  "&insert=";
+            if ($.trim(nama).length > 0 & $.trim(nohp).length > 0 & $.trim(jenis).length > 0 & $.trim(warna).length > 0 & $.trim(jumlah).length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "https://faishalp13.000webhostapp.com/cordova/www/insert.php",
+                    data: dataString,
+                    crossDomain: true,
+                    cache: false,
+                    beforeSend: function() {
+                        $("#insert").val('Connecting...');
+                    },
+                    success: function(data) {
+                        if (data == "success") {
+                            alert("selamat udah bisa");
+                            $("#insert").val('submit');
+                        } else if (data == "error") {
+                            alert("ehek belum bisa");
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+        <h1 class="title">Insert Database</h1>
+        <a class="button button-clear" href="readjson.html">Read JSON</a>
+    </div>
+    <br/>
+    <br/>
+    <div class="list">
+        <input type="hidden" id="id" value="" />
+        <div class="item">
+            <label>nama</label>
+            <input type="text" id="nama" value="" />
+        </div>
+        <div class="item"> 
+            <label>nohp</label>
+            <input type="text" id="nohp" value="" />
+        </div>
+        <div class="item">
+            <label>jenis</label>
+            <input type="text" id="jenis" value="" />
+        </div>
+        <div class="item">
+            <label>warna</label>
+            <input type="text" id="warna" value="" />
+        </div>
+        <div class="item">
+            <label>jumlah</label>
+            <input type="text" id="jumlah" value="" />
+        </div>
+        <div class="item">
+            <input type="button" id="insert" class="button button-block" value="Insert" />
+        </div>
+    </div>
+</body>
+
+</html>
